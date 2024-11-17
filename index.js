@@ -9,7 +9,7 @@ import session from "express-session";
 import env from "dotenv";
 
 const app = express();
-const port = 3000;
+const PORT = 3000;
 const saltRounds = 10;
 env.config();
 
@@ -37,4 +37,8 @@ db.connect();
 
 app.get("/", (req, res) => {
     res.render("index.ejs");
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
