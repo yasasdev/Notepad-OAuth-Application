@@ -13,6 +13,7 @@ body {
 }
 
 .container {
+    font-family: 'Times New Roman', Times, serif;
     background-color: #ffffff;
     border: 1px solid #ccc;
     border-radius: 8px;
