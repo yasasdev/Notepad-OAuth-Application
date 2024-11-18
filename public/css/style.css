@@ -1,12 +1,53 @@
 body {
     font-family: "Indie Flower", cursive;
     font-weight: 400;
-    font-style: normal;
+    font-style: normal;    
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures the body fills the viewport height */
+    background-image: url('https://www.transparenttextures.com/patterns/paper.png');
+    background-size: cover;
 }
 
-.footer{
+.container {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+    margin: auto; /* Centers the container within the flexbox layout */
+}
+
+.footer {
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
     font-size: 12px;
-    color:#7a96b9
+    color: #7a96b9;
+    margin-top: auto; /* Pushes the footer to the bottom of the page */
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: #45a049;
 }
