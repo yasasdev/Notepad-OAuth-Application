@@ -39,6 +39,14 @@ app.get("/", (req, res) => {
     res.render("index.ejs");
 });
 
+app.get("/login", (req, res) => {
+    res.render("login.ejs");
+});
+
+app.post("/login", (req, res) => {
+    
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
