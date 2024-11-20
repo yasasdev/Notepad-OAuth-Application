@@ -43,6 +43,36 @@ app.get("/register", (req, res) => {
     res.render("register.ejs");
 });
 
+app.post("/register", async (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    try {
+        const checkUser = await db.query("SELECT * FROM users WHERE email = $1", [email]);
+
+        if(checkUser.rows.length > 0){
+            res.redirect("/index");
+        } else {
+            bcrypt.hash(password, saltRounds, async (err, hash) => {
+                if(err) {
+                    console.error("Error occured", err);
+                } else {
+                    const insertUser = await db.query(
+                        "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *", [email, hash]
+                    );
+                    const user = insertUser.rows[0];
+                    req.login(user, (err) => {
+                        console.log("User Registered Successfully");
+                        res.redirect("/notes");
+                    });
+                }
+            });
+        }
+    } catch (error) {
+        console.log(err);
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
