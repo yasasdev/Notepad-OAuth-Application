@@ -19,6 +19,17 @@ body {
     text-align: center; /* Align text inside the element */
 }
 
+.container-home{
+    font-family: 'Courier New', Courier, monospace;
+    width: 25%;
+    background-color: #f0f0f0;
+    text-align: center;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
 .login-container {
     font-family: 'Courier New', Courier, monospace;
     background-color: #ffffff;
@@ -88,7 +99,7 @@ button:hover {
 .google-button {
     width: 95%;
     padding: 10px;
-    background-color: #4d71a1; /* Google red */
+    background-color: #4d71a1;
     color: #fff;
     border: none;
     border-radius: 4px;
