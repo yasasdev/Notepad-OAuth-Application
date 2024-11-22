@@ -47,6 +47,26 @@ app.get("/register", (req, res) => {
   res.render("register.ejs");
 });
 
+app.get("/auth/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  })
+);
+
+app.get("/auth/google/notes",
+  passport.authenticate("google", {
+    successRedirect: "/notes",
+    failureRedirect: "/login",
+  })
+);
+
+app.post("/login",
+  passport.authenticate("local", {
+    successRedirect: "/notes",
+    failureRedirect: "/login",
+  })
+);
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
