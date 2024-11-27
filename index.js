@@ -47,6 +47,24 @@ app.get("/register", (req, res) => {
   res.render("register.ejs");
 });
 
+app.get("/notes", async (req, res) => {
+  if(req.isAuthenticated()){
+    try {
+      const result = await db.query("SELECT notes from users WHERE email = $1", [req.user.email]);
+      const notes = result.rows[0].notes;
+      if(notes){
+        res.render("notes.ejs", { notes: notes });
+      } else {
+        res.render("notes.ejs", { notes: "Enter your notes..." });
+      }
+    } catch (error) {
+      console.log(error);      
+    }
+  } else {
+    res.redirect("/login");
+  }
+});
+
 app.get("/auth/google",
   passport.authenticate("google", {
     scope: ["profile", "email"],
@@ -151,6 +169,14 @@ passport.use("google",
     }
   )
 );
+
+passport.serializeUser((user, cb) => {
+  cb(null, user);
+});
+
+passport.deserializeUser((user, cb) => {
+  cb(null, user);
+});
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
