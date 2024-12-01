@@ -154,6 +154,7 @@ passport.use("google",
     },
     async (accessToken, refreshToken, profile, cb) => {
       try {
+        // console.log("Google Profile:", profile);
         const result = await db.query("SELECT * FROM users WHERE email = $1", [profile.email]);
         if(result.rows.length === 0){
           const newUser = await db.query(
@@ -164,6 +165,7 @@ passport.use("google",
           return cb(null, result.rows[0]);
         }
       } catch (err) {
+        // console.error("Error in Google Strategy:", err);
         return cb(err);  
       }
     }
