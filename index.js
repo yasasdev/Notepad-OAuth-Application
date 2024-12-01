@@ -136,10 +136,11 @@ passport.use("local",
           }
         });
       } else {
-        return cb(null, "User not found");
+        return cb("User not found");
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
+      return cb(err);
     }
   })
 );
