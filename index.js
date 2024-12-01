@@ -105,7 +105,7 @@ app.post("/register", async (req, res) => {
           );
           const user = result.rows[0];
           req.login(user, (err) => {
-            console.log("Successfully registered and logged in");
+            // console.log("Successfully registered and logged in");
             res.redirect("/notes");
           });
         }
