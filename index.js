@@ -50,7 +50,7 @@ app.get("/register", (req, res) => {
 app.get("/notes", async (req, res) => {
   if(req.isAuthenticated()){
     try {
-      const result = await db.query("SELECT notes from users WHERE email = $1", [req.user.email]);
+      const result = await db.query("SELECT * from notes WHERE email = $1", [req.user.email]);
       const notes = result.rows[0].notes;
       if(notes){
         res.render("notes.ejs", { notes: notes });
