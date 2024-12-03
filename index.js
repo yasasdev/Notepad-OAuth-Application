@@ -50,7 +50,8 @@ app.get("/register", (req, res) => {
 app.get("/notes", async (req, res) => {
   if(req.isAuthenticated()){
     try {
-      const result = await db.query("SELECT * from notes WHERE email = $1", [req.user.email]);
+      const result = await db.query(
+        "SELECT * FROM notes WHERE email = (SELECT email FROM users WHERE email = $1)", [req.user.email]);
       const notes = result.rows[0].notes;
       if(notes){
         res.render("notes.ejs", { notes: notes });
@@ -157,16 +158,19 @@ passport.use("google",
       try {
         // console.log("Google Profile:", profile);
         const result = await db.query("SELECT * FROM users WHERE email = $1", [profile.email]);
+
         if(result.rows.length === 0){
+          //Inserting a new user to the users table
           const newUser = await db.query(
             "INSERT INTO users (email, password) VALUES ($1, $2)", [profile.email, "google"]
           );
+
           return cb(null, newUser.rows[0]);
         } else {
           return cb(null, result.rows[0]);
         }
       } catch (err) {
-        // console.error("Error in Google Strategy:", err);
+        console.error("Error in Google Strategy:", err);
         return cb(err);  
       }
     }
