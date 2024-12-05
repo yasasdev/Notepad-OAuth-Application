@@ -54,11 +54,10 @@ app.get("/notes", async (req, res) => {
     try {
       const result = await db.query(
         "SELECT * FROM notes WHERE email = (SELECT email FROM users WHERE email = $1)", [req.user.email]);
-      const notes = result.rows[0].notes;
+      // const notes = result.rows[0].notes;
+      const notes = Array.isArray(result.rows[0].notes) ? result.rows[0].notes : "Sorry, no notes found.";
       if(notes){
         res.render("notes.ejs", { notes: notes });
-      } else {
-        res.render("notes.ejs", { notes: "Enter your notes..." });
       }
     } catch (error) {
       console.log(error);      

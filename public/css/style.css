@@ -118,3 +118,56 @@ button:hover {
     text-align: center;
     padding: 10px 0;
 }
+
+.container-notes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+
+.note-heading {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.notes {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
+
+.btn-add {
+    width: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; /* To center it horizontally within its parent container */
+    font-weight: bold;
+}
+
+.date {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-control {
+    font-family: "Indie Flower", cursive;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    margin-top: 20px;
+}
