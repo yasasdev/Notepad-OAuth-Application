@@ -36,7 +36,7 @@ const db = new pg.Client({
 db.connect();
 
 app.get("/", (req, res) => {
-    res.render("index.ejs");
+  res.render("index.ejs");
 });
 
 app.get("/login", (req, res) => {
@@ -48,7 +48,9 @@ app.get("/register", (req, res) => {
 });
 
 app.get("/notes", async (req, res) => {
-  if(req.isAuthenticated()){
+  if (req.isAuthenticated()){
+    // console.log("Authenticated:", req.isAuthenticated());
+    // console.log("User:", req.user);
     try {
       const result = await db.query(
         "SELECT * FROM notes WHERE email = (SELECT email FROM users WHERE email = $1)", [req.user.email]);
@@ -79,21 +81,22 @@ app.get("/auth/google/notes",
   })
 );
 
-app.post("/login",
-  passport.authenticate("local", {
-    successRedirect: "/notes",
-    failureRedirect: "/login",
+app.post('/login', 
+  passport.authenticate('local', {
+    successRedirect: '/notes',
+    failureRedirect: '/login',
   })
 );
 
 app.post("/register", async (req, res) => {
-  const email = req.body.email;
+  const email = req.body.username;
   const password = req.body.password;
 
   try {
     const checkResult = await db.query("SELECT * FROM users WHERE email = $1", [email]);
 
     if(checkResult.rows.length > 0){
+      // console.log("User  already exists");
       res.redirect("/login");
     } else {
       bcrypt.hash(password, saltRounds, async (err, hash) => {
@@ -124,9 +127,10 @@ app.post("/register", async (req, res) => {
 });
 
 passport.use("local",
-  new Strategy(async function verify(email, password, cb) {
+  new Strategy(async function verify(username, password, cb) {
     try {
-      const result = await db.query("SELECT * FROM users WHERE email = $1", [email]);
+      // console.log("Verifying user");
+      const result = await db.query("SELECT * FROM users WHERE email = $1", [username]);
       if(result.rows.length > 0){
         const user = result.rows[0];
         const storedHashedPassword = user.password;
@@ -136,17 +140,20 @@ passport.use("local",
             return cb(err);
           } else {
             if(valid) {
+              // console.log("User authenticated successfully");
               return cb(null, user);
             } else {
+              console.log("Invalid password");
               return cb(null, false);
             }
           }
         });
       } else {
-        return cb("User not found");
+        console.log("User  not found");
+        return cb(null, false);
       }
     } catch (err) {
-      console.error(err);
+      console.error("Error during login:", err);
       return cb(err);
     }
   })
@@ -182,7 +189,7 @@ passport.use("google",
           return cb(null, result.rows[0]);
         }
       } catch (err) {
-        console.error("Error in Google Strategy:", err);
+        console.error("Error in Google Strategy:", err);  
         return cb(err);  
       }
     }
