@@ -104,6 +104,12 @@ app.post("/register", async (req, res) => {
             "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *", 
             [email, hash]
           );
+
+          // Inserting the user's email into the notes table
+          await db.query(
+            "INSERT INTO notes (email) VALUES ($1)", 
+            [email]
+          );
           const user = result.rows[0];
           req.login(user, (err) => {
             // console.log("Successfully registered and logged in");
@@ -165,7 +171,7 @@ passport.use("google",
             "INSERT INTO users (email, password) VALUES ($1, $2)", [profile.email, "google"]
           );
 
-          // Insert the user's email into the notes table
+          // Inserting the user's email into the notes table
           await db.query(
             "INSERT INTO notes (email) VALUES ($1)", 
             [profile.email]
