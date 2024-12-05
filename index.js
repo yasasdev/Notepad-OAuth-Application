@@ -165,6 +165,12 @@ passport.use("google",
             "INSERT INTO users (email, password) VALUES ($1, $2)", [profile.email, "google"]
           );
 
+          // Insert the user's email into the notes table
+          await db.query(
+            "INSERT INTO notes (email) VALUES ($1)", 
+            [profile.email]
+          );
+
           return cb(null, newUser.rows[0]);
         } else {
           return cb(null, result.rows[0]);
