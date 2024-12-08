@@ -171,3 +171,15 @@ button:hover {
     transition: border-color 0.3s ease;
     margin-top: 20px;
 }
+
+.btn-logout {
+    background-color: rgb(196, 59, 59);
+    width: 50%;
+    margin-top: 10px;
+    position: absolute;
+    
+}
+
+.btn-logout:hover {
+    background-color: rgb(141, 42, 42);
+}
