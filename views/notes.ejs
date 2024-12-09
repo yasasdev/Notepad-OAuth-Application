@@ -1,21 +1,52 @@
-<%- include('partials/header') %>
-<div class="main-page">
-    <div id="heading">
-        <h1 class="note-heading">Notepad 📝✔</h1>
-        <p class="date"> <%= new Date().toDateString() %> </p>
-        </h1>
-    </div>
+<%- include('partials/header.ejs'); -%>
 
-    <div class="box">
-        <form action="/delete" method="post">
-            <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="">
-        </form>
-
-        <form class="item" action="/add" method="post">
-            <input type="text" name="newItem" placeholder="New Item" autocomplete="off" autofocus="true" />
-            <button class="add" type="submit" name="list" value="s" >+</button>
-        </form>
-    </div>
+<div class="box" id="heading">
+  <h1>
+    Notes for <%= req.user.email %> <br>
+    <%= new Date().toDateString() %>
+  </h1>
 </div>
 
-<%- include('partials/footer') %>
+<div class="box">
+  <% if (notes && notes.length > 0) { %>
+    <% for (let note of notes) { %>
+      <div class="item">
+        <form action="/delete" method="post">
+          <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= note.id %>">
+        </form>
+
+        <p id="title<%= note.id %>">
+          <%= note.title %>
+        </p>
+
+        <form class="edit" action="/edit" method="post">
+          <input type="hidden" name="updatedItemId" value="<%= note.id %>">
+          <input id="input<%= note.id %>" type="text" name="updatedItemTitle" value="<%= note.title %>" autocomplete="off"
+            hidden>
+          <button id="done<%= note.id %>" class="edit" type="submit" hidden><img class="icon"
+              src="/assets/icons/check-solid.svg" alt="tick image"></button>
+        </form>
+        <button id="edit<%= note.id %>" class="edit" onclick="handler('<%= note.id %>')"><img class="icon"
+            src="/assets/icons/pencil-solid.svg" alt="pencil image"></button>
+      </div>
+    <% } %>
+  <% } else { %>
+    <p>No notes available. Add your first note below!</p>
+  <% } %>
+
+  <form class="item" action="/add" method="post">
+    <input type="text" name="note" placeholder="New Note" autocomplete="off" autofocus>
+    <button class="add" type="submit">+</button>
+  </form>
+</div>
+
+<script>
+  function handler(id) {
+    document.getElementById("title" + id).setAttribute("hidden", true);
+    document.getElementById("edit" + id).setAttribute("hidden", true);
+    document.getElementById("done" + id).removeAttribute("hidden");
+    document.getElementById("input" + id).removeAttribute("hidden");
+  }
+</script>
+
+<%- include('partials/footer.ejs'); -%>
