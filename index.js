@@ -196,11 +196,16 @@ passport.use("google",
 );
 
 passport.serializeUser((user, cb) => {
-  cb(null, user);
+  cb(null, user.id); // Storing only the user ID in the session
 });
 
-passport.deserializeUser((user, cb) => {
-  cb(null, user);
+passport.deserializeUser(async (id, cb) => {
+  try {
+    const user = await db.query("SELECT * FROM users WHERE id = $1", [id]);
+    cb(null, user.rows[0]);
+  } catch (err) {
+    cb(err);
+  }
 });
 
 app.listen(port, () => {
