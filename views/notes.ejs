@@ -1,5 +1,5 @@
 <%- include('partials/header') %>
-
+<div class="main-page">
     <div id="heading">
         <h1 class="note-heading">Notepad 📝✔</h1>
         <p class="date"> <%= new Date().toDateString() %> </p>
@@ -7,9 +7,11 @@
     </div>
 
     <div class="box">
-        <form action="" method="post">
-            <input type="text" class="note-input" placeholder="Enter your notes here..." />
+        <form class="item" action="/add" method="post">
+            <input type="text" name="newItem" placeholder="New Item" autocomplete="off" autofocus="true" />
+            <button class="add" type="submit" name="list" value="s" >+</button>
         </form>
     </div>
+</div>
 
 <%- include('partials/footer') %>
