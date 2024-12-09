@@ -1,9 +1,15 @@
 <%- include('partials/header') %>
 
-    <div class="box" id="heading">
+    <div id="heading">
         <h1 class="note-heading">Notepad 📝✔</h1>
         <p class="date"> <%= new Date().toDateString() %> </p>
         </h1>
+    </div>
+
+    <div class="box">
+        <form action="" method="post">
+            <input type="text" class="note-input" placeholder="Enter your notes here..." />
+        </form>
     </div>
 
 <%- include('partials/footer') %>

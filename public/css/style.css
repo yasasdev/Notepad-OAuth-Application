@@ -183,3 +183,36 @@ button:hover {
 .btn-logout:hover {
     background-color: rgb(141, 42, 42);
 }
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.note-input {
+    max-width: 400px;
+    margin: 50px auto;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+}
+
+input[type="text"] {
+    text-align: left;
+    height: 60px;
+    top: 10px;
+    border: none;
+    font-size: 20px;
+    font-weight: 100;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    box-shadow: inset 0 -3px 0 0 #a683e3;
+}
+
+::placeholder {
+    color: rgb(119, 116, 116);
+    opacity: 1;
+}
