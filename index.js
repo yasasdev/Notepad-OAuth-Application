@@ -77,6 +77,17 @@ app.post("/add", async (req, res) => {
   }
 });
 
+app.post("/edit", async (req, res) => {
+  const updatedNote = req.body.updatedNote;
+  try {
+    await db.query("UPDATE notes SET notes = $1 WHERE id = $2", [updatedNote, req.body.id]);
+    res.redirect("/notes");
+  } catch (error) {
+    console.error("Error editing note:", error);
+    res.redirect("/notes");  
+  }
+});
+
 app.get("/auth/google",
   passport.authenticate("google", {
     scope: ["profile", "email"],
