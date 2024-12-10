@@ -65,6 +65,18 @@ app.get("/notes", async (req, res) => {
   }
 });
 
+app.post("/add", async (req, res) => {
+  const note = req.body.note;
+  try {
+    const result = await db.query(
+      "INSERT INTO notes (email, notes) VALUES ($1, $2) RETURNING *", [req.user.email, note]
+    );
+    res.redirect("/notes");
+  } catch (error) {
+    console.log(error);    
+  }
+});
+
 app.get("/auth/google",
   passport.authenticate("google", {
     scope: ["profile", "email"],
