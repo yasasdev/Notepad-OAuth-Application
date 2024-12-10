@@ -2,7 +2,7 @@
 
 <div class="box" id="heading">
   <h1>
-    Notes for <%= req.user.email %> <br>
+    Notes of <%= req.user.email %> <br>
     <%= new Date().toDateString() %>
   </h1>
 </div>
@@ -21,7 +21,7 @@
 
         <form class="edit" action="/edit" method="post">
           <input type="hidden" name="updatedItemId" value="<%= note.id %>">
-          <input id="input<%= note.id %>" type="text" name="updatedItemTitle" value="<%= note.title %>" autocomplete="off"
+          <input id="input<%= note.id %>" type="text" name="updatedItemTitle" value="<%= note.email %>" autocomplete="off"
             hidden>
           <button id="done<%= note.id %>" class="edit" type="submit" hidden><img class="icon"
               src="/assets/icons/check-solid.svg" alt="tick image"></button>

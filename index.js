@@ -52,13 +52,11 @@ app.get("/notes", async (req, res) => {
     // console.log("Authenticated:", req.isAuthenticated());
     // console.log("User:", req.user);
     try {
-      const result = await db.query(
-        "SELECT * FROM notes WHERE email = (SELECT email FROM users WHERE email = $1)", [req.user.email]);
-      // const notes = result.rows[0].notes;
-      const notes = Array.isArray(result.rows[0].notes) ? result.rows[0].notes : "Sorry, no notes found.";
-      if(notes){
-        res.render("notes.ejs", { notes: notes });
-      }
+      const result = await db.query("SELECT id,notes FROM notes WHERE email=$1", [req.user.email]);
+      const notes = result.rows;
+      res.render("notes.ejs", {
+        notes: notes
+      });
     } catch (error) {
       console.log(error);      
     }
