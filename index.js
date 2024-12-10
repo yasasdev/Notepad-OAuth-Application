@@ -65,6 +65,19 @@ app.get("/notes", async (req, res) => {
   }
 });
 
+app.get("/auth/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  })
+);
+
+app.get("/auth/google/notes",
+  passport.authenticate("google", {
+    successRedirect: "/notes",
+    failureRedirect: "/login",
+  })
+);
+
 app.post("/add", async (req, res) => {
   const note = req.body.note;
   try {
@@ -88,18 +101,17 @@ app.post("/edit", async (req, res) => {
   }
 });
 
-app.get("/auth/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
-  })
-);
-
-app.get("/auth/google/notes",
-  passport.authenticate("google", {
-    successRedirect: "/notes",
-    failureRedirect: "/login",
-  })
-);
+app.post("/delete", async (req, res) => {
+  const deleteNoteId = req.body.deleteItemId;
+  try {
+    await db.query("DELETE FROM notes WHERE id = $1", [deleteNoteId]);
+    res.redirect("/notes");
+  } catch (error) {
+    console.error("Error deleting note:", error);
+    res.redirect("/notes");
+    
+  }
+});
 
 app.post('/login', 
   passport.authenticate('local', {
