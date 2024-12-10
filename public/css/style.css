@@ -188,6 +188,7 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .note-input {
