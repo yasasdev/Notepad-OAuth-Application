@@ -79,7 +79,7 @@ app.get("/auth/google/notes",
 );
 
 app.post("/add", async (req, res) => {
-  const note = req.body.note;
+  const note = req.body.newNote;
   try {
     const result = await db.query(
       "INSERT INTO notes (email, notes) VALUES ($1, $2) RETURNING *", [req.user.email, note]
@@ -91,9 +91,10 @@ app.post("/add", async (req, res) => {
 });
 
 app.post("/edit", async (req, res) => {
-  const updatedNote = req.body.updatedNote;
+  const noteId = req.body.noteId;
+  const updatedNote = req.body.updatedNoteTitle;
   try {
-    await db.query("UPDATE notes SET notes = $1 WHERE id = $2", [updatedNote, req.body.id]);
+    await db.query("UPDATE notes SET notes = $1 WHERE id = $2", [updatedNote, noteId]);
     res.redirect("/notes");
   } catch (error) {
     console.error("Error editing note:", error);
