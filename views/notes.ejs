@@ -2,7 +2,7 @@
 
 <div class="box-heading" id="heading">
   <h1>
-    Notepad 📝✔
+    Today
   </h1>
   <p>
     <%= new Date().toDateString() %>
@@ -17,7 +17,7 @@
       </form>
 
       <p id="title<%= note.id %>">
-        <%= note.note %>
+        <%= note.notes %>
       </p>
 
       <form class="edit" action="/edit" method="post">
@@ -25,10 +25,10 @@
         <input id="input<%= note.id %>" type="text" name="updatedNoteTitle" value="<%= note.note %>" autocomplete="off"
         autofocus="true" hidden="true" />
         <button id="done<%= note.id %>" class="edit" type="submit" hidden><img class="icon"
-          src="../public/assets/icons/check-solid.svg" alt="tick image"></button>
+          src="/assets/icons/check-solid.svg" alt="tick image"></button>
       </form>
       <button id="edit<%= note.id %>" class="edit" onclick="handler('<%= note.id %>')"><img class="icon" 
-        src="../public/assets/icons/pencil-solid.svg" alt="pencil image">
+        src="/assets/icons/pencil-solid.svg" alt="pencil image">
       </button>
     </div>
     <% } %>

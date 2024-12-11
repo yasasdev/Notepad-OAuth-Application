@@ -184,162 +184,110 @@ button:hover {
     background-color: rgb(141, 42, 42);
 }
 
-.box {
-    max-width: 400px;
-    margin: 50px auto;
-    background: white;
-    border-radius: 5px;
-    box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
-}
-
-.box-heading {    
-    max-width: 400px;
-    margin: 50px auto;
+.box-heading {
     font-family: 'Courier New', Courier, monospace;
-}
-
-#heading {
     text-align: center;
 }
 
-form.edit {
-    display: flex;
+/* General container styling */
+.box {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
-
-.item {
-    min-height: 70px;
+  
+/* Styling for individual notes */
+.note {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #f1f1f1;
-}
-
-.item:last-child {
-    border-bottom: 0;
-}
-
-input[type="checkbox"] {
-    margin: 20px;
-    margin-left: 0;
-}
-
-p {
-    margin: 0;
-    padding: 20px 0;
-    font-size: 20px;
-    color: #00204a;
-}
-
-form {
-    text-align: center;
-    margin-left: 20px;
-}
-
-button.add {
-    min-height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    border-color: transparent;
-    background-color: #a683e3;
-    color: #fff;
-    font-size: 30px;
-    border-width: 0;
-}
-
-button.edit {
-    margin-left: 0px;
-    margin-right: 20px;
+    margin-bottom: 10px;
+    padding: 10px;
     border: none;
-    background: none;
-}
-
-.icon {
-    height: 20px;
-}
-
-input[type="text"] {
-    text-align: left;
-    height: 60px;
-    top: 10px;
-    border: none;
-    background: transparent;
-    font-size: 20px;
-    font-weight: 200;
-    width: 80%;
-}
-
-input[type="text"]:focus {
-    outline: none;
-    box-shadow: inset 0 -3px 0 0 #a683e3;
-}
-
-::placeholder {
-    color: lightgray;
-    opacity: 1;
-}
-
-
-
-/* .note-input {
-    max-width: 400px;
-    margin: 50px auto;
-    background: white;
     border-radius: 5px;
-    box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
-
-input[type="text"] {
-    text-align: left;
-    height: 60px;
-    top: 10px;
+  
+/* Checkbox styling */
+.note input[type="checkbox"] {
+    margin-right: 15px;
+    cursor: pointer;
+    transform: scale(1.2);
+}
+  
+/* Paragraph styling for the note text */
+.note p {
+    flex: 1;
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+}
+  
+/* Edit button styling */
+.note button.edit {
+    background: none;
     border: none;
-    font-size: 20px;
-    font-weight: 100;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 5px;
 }
-
-input[type="text"]:focus {
-    outline: none;
-    box-shadow: inset 0 -3px 0 0 #a683e3;
+  
+/* Icon styling */
+.note img.icon {
+    width: 18px;
+    height: 18px;
+    opacity: 0.7;
+    transition: opacity 0.3s;
 }
-
-::placeholder {
-    color: rgb(119, 116, 116);
+  
+.note img.icon:hover {
     opacity: 1;
 }
-
-.main-page {
-    background-color: #e4e9fd;
-    background-image: -webkit-linear-gradient(65deg, #a683e3 50%, #e4e9fd 50%);
-    min-height: 1000px;
-    font-family: "helvetica neue";
+  
+/* Form for adding a new note */
+form.item {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
-
-button.add {
-    min-height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    border-color: transparent;
-    background-color: #a683e3;
-    color: #fff;
-    font-size: 30px;
-    border-width: 0;
-}
-
-.icon {
-    height: 20px;
-}
-
-input[type="text"] {
-    text-align: left;
-    height: 60px;
-    top: 10px;
+  
+form.item input[type="text"] {
+    flex: 1;
+    padding: 10px;
     border: none;
-    background: transparent;
-    font-size: 20px;
-    font-weight: 200;
-    width: 80%;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    background-color: #f3f3f3;
 }
-
-input[type="text"]:focus {
-    outline: none;
-    box-shadow: inset 0 -3px 0 0 #a683e3;
-} */
+  
+form.item button.add {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    border: none;
+    background-color: #6c63ff;
+    color: white;
+    font-size: 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+  
+form.item button.add:hover {
+    background-color: #5848c2;
+}  
