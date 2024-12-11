@@ -207,17 +207,14 @@ button:hover {
     align-items: center;
     margin-bottom: 10px;
     padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden;    /* Prevent content from spilling outside the box */
 }
   
 /* Checkbox styling */
 .note input[type="checkbox"] {
     margin-right: 15px;
     cursor: pointer;
-    transform: scale(1.2);
 }
   
 /* Paragraph styling for the note text */
@@ -227,6 +224,8 @@ button:hover {
     font-size: 18px;
     color: #333;
     font-family: 'Arial', sans-serif;
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: visible;   
 }
   
 /* Edit button styling */
@@ -282,6 +281,7 @@ form.item button.add {
     border-radius: 50%;
     cursor: pointer;
     margin-left: 10px;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
