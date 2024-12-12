@@ -149,7 +149,7 @@ app.post("/register", async (req, res) => {
           // Inserting the user's email into the notes table
           await db.query(
             "INSERT INTO notes (email, notes) VALUES ($1, $2)", 
-            [email, "Default note"]
+            [email, "Default note, feel fre to edit or delete."]
           );
           const user = result.rows[0];
           req.login(user, (err) => {
