@@ -47,6 +47,15 @@ app.get("/register", (req, res) => {
   res.render("register.ejs");
 });
 
+app.get("/logout", (req, res) => {
+  req.logout(function (err){
+    if(err){
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
+
 app.get("/notes", async (req, res) => {
   if (req.isAuthenticated()){
     // console.log("Authenticated:", req.isAuthenticated());
