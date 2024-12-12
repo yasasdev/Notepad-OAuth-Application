@@ -92,7 +92,7 @@ app.post("/add", async (req, res) => {
 
 app.post("/edit", async (req, res) => {
   const noteId = req.body.noteId;
-  const updatedNote = req.body.updatedNoteTitle;
+  const updatedNote = req.body.newNote;
   try {
     await db.query("UPDATE notes SET notes = $1 WHERE id = $2", [updatedNote, noteId]);
     res.redirect("/notes");
@@ -148,8 +148,8 @@ app.post("/register", async (req, res) => {
 
           // Inserting the user's email into the notes table
           await db.query(
-            "INSERT INTO notes (email) VALUES ($1)", 
-            [email]
+            "INSERT INTO notes (email, notes) VALUES ($1, $2)", 
+            [email, "Default note"]
           );
           const user = result.rows[0];
           req.login(user, (err) => {
