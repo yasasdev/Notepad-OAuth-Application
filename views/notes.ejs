@@ -20,32 +20,36 @@
         <%= note.notes %>
       </p>
 
-      <form class="edit" action="/edit" method="post">
-        <input type="hidden" name="noteId" value="<%= note.id %>">
-        <input id="input<%= note.id %>" type="text" name="updatedNoteTitle" value="<%= note.note %>" autocomplete="off"
-        autofocus="true" hidden="true" />
-        <button id="done<%= note.id %>" class="edit" type="submit" hidden><img class="icon"
-          src="/assets/icons/check-solid.svg" alt="tick image"></button>
-      </form>
-      <button id="edit<%= note.id %>" class="edit" onclick="handler('<%= note.id %>')"><img class="icon" 
-        src="/assets/icons/pencil-solid.svg" alt="pencil image">
+      <button id="edit<%= note.id %>" class="edit" onclick="startEdit('<%= note.id %>', '<%= note.notes %>')">
+        <img class="icon" src="/assets/icons/pencil-solid.svg" alt="pencil image">
       </button>
     </div>
-    <% } %>
+  <% } %>
 
-    <form class="item" action="/add" method="post">
-      <input type="text" name="newNote" placeholder="New Note" autocomplete="off" autofocus="true" />
-      <button class="add" type="submit" name="list" value="add">+</button>
-    </form>
+  <form class="item" action="/add" method="post" id="noteForm">
+    <input type="hidden" name="noteId" id="noteId" value="">
+    <input type="text" name="newNote" id="newNote" placeholder="New Note" autocomplete="off" autofocus="true" />
+    <button class="add" type="submit" name="list" value="add" id="addButton">+</button>
+  </form>
 </div>
 
 <script>
-  function handler(id) {
-    document.getElementById("title" + id).setAttribute("hidden", true)
-    document.getElementById("edit" + id).setAttribute("hidden", true)
-    document.getElementById("done" + id).removeAttribute("hidden")
-    document.getElementById("input" + id).removeAttribute("hidden")
+  function startEdit(id, content) {
+    // Set the form fields for editing
+    document.getElementById('noteId').value = id;
+    document.getElementById('newNote').value = content;
   }
+
+  document.getElementById('noteForm').addEventListener('submit', function(event) {
+    const noteId = document.getElementById('noteId').value;
+    if (noteId) {
+      // If editing, change the form action to /edit
+      this.action = '/edit';
+    } else {
+      // If adding a new note, ensure the action remains /add
+      this.action = '/add';
+    }
+  });
 </script>
 
 <%- include('partials/footer.ejs'); -%>
