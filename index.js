@@ -227,8 +227,8 @@ passport.use("google",
 
           // Inserting the user's email into the notes table
           await db.query(
-            "INSERT INTO notes (email) VALUES ($1)", 
-            [profile.email]
+            "INSERT INTO notes (email, notes) VALUES ($1, $2)", 
+            [profile.email, "Default note, feel fre to edit or delete."]
           );
 
           return cb(null, newUser.rows[0]);
