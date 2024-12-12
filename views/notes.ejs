@@ -35,7 +35,7 @@
 
 <script>
   function startEdit(id, content) {
-    // Set the form fields for editing
+    // Setting the form fields for editing
     document.getElementById('noteId').value = id;
     document.getElementById('newNote').value = content;
   }
@@ -43,10 +43,10 @@
   document.getElementById('noteForm').addEventListener('submit', function(event) {
     const noteId = document.getElementById('noteId').value;
     if (noteId) {
-      // If editing, change the form action to /edit
+      // changing the form action to /edit
       this.action = '/edit';
     } else {
-      // If adding a new note, ensure the action remains /add
+      // else action remains as /add
       this.action = '/add';
     }
   });
